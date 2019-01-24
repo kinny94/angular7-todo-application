@@ -22,7 +22,7 @@ export class TodoComponent implements OnInit {
       {
         id: 1,
         title: 'Todo Two',
-        completed: false
+        completed: true
       },
       {
         id: 1,
