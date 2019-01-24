@@ -2,7 +2,8 @@ import { TodoService } from './../../services/todo.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Todo } from './../../models/todos';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-todo',
@@ -16,6 +17,13 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.todos = this.todoService.getTodos();
+  }
+
+  deleteTodo(todo: Todo) {
+    this.todos.pipe(
+      map(todos => todos.filter(currentTodo => currentTodo.id !== todo.id))
+    ).subscribe();
+    this.todoService.deleteTodo(todo).subscribe();
   }
 
 }
